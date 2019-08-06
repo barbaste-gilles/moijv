@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+
+<div class="example-wrapper">
+    <h1>Bienvenue sur MoiJV!</h1>
+    <p>MoiJV est un site collaboratif de prêt de jeux vidéos.</p>
+
+    <h2>Nos produits</h2>
+    <ul>
+        {% for product in products %}
+            <li><a href="{{ path('product', { 'id' : product.id }) }}">{{ product.name }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
+
