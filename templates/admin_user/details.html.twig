@@ -1,0 +1,16 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Détails de l'utilisateur {{ user.username }}{% endblock %}
+
+{% block body %}
+<div class="example-wrapper">
+    <h1>Détails de l'utilisateur {{ user.username }}</h1>
+
+    <ul>
+        <li>Nom d'utilisateur : {{  user.username }}</li>
+        <li>Email : {{ user.email }}</li>
+        {# en PHP : <?php echo implode(', ', $user.getRoles()) ?> #}
+        <li>Roles : {{ user.roles | join(', ', ' et ') }}</li>
+    </ul>
+</div>
+{% endblock %}
