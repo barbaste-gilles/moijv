@@ -7,5 +7,7 @@
 /var/
 /vendor/
 /.idea/
-/.vscode/
+/.vscode
+/public/uploads/*
+!/public/uploads/.gitkeep
 ###< symfony/framework-bundle ###

@@ -35,9 +35,13 @@ class UserController extends AbstractController
             $encodedPassword = $encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($encodedPassword);
 
+            // on ajoute le rôle ROLE_USER à notre utilisateur
+            $user->setRole('ROLE_USER');
             // on ajoute l'utilisateur à la base
             $objectManager->persist($user);
             $objectManager->flush();
+            // on redirige l'utilisateur vers le formulaire de connexion
+            return $this->redirectToRoute('app_login');
         }
 
         return $this->render('user/signup.html.twig', [

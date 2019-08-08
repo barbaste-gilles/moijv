@@ -11,9 +11,11 @@
         {% block nav %}
             <a href="{{ path('home') }}">Accueil</a>
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                <a href="{{ path('app_logout') }}">Log out</a>
+                <a href="{{ path('add_product') }}">Ajouter un produit</a>
+                <a href="{{ path('app_logout') }}">Déconnexion</a>
             {% else %}
-                <a href="{{ path('app_login') }}">Log in</a>
+                <a href="{{ path('app_login') }}">Connexion</a>
+                <a href="{{ path('signup') }}">S'inscrire</a>
             {% endif %}
             {% if is_granted('ROLE_ADMIN') %}
                 <a href="{{ path('admin_dashboard') }}">Administration</a>
