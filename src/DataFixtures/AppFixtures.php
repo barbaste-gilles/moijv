@@ -22,22 +22,24 @@ class AppFixtures extends Fixture
     {
         $faker = Factory::create('fr_FR');
 
+        $user = new User();
+
+        $user->setEmail('thibaulttruffert@gmail.com');
+        $user->setRole('ROLE_USER,ROLE_ADMIN');
+        $user->setUsername('thibault');
+        $user->setPassword($this->encoder->encodePassword($user, 'thibault'));
+        $manager->persist($user);
+
         for($i=0; $i<20; $i++) {
             $product = new Product();
             $product->setName($faker->text(30));
             $product->setDescription($faker->realText);
             $product->setCreationDate($faker->dateTimeBetween('-2 years'));
             $product->setImage($faker->imageUrl);
+            $user->addProduct($product);
             $manager->persist($product);
         }
 
-        $user = new User();
-
-        $user->setEmail('thibaulttruffert@gmail.com');
-        $user->setRoles('ROLE_USER,ROLE_ADMIN');
-        $user->setUsername('thibault');
-        $user->setPassword($this->encoder->encodePassword($user, 'thibault'));
-        $manager->persist($user);
 
         $manager->flush();
     }

@@ -47,6 +47,7 @@ class ProductController extends AbstractController
                 $imageFile->move($folder, $filename);
                 $product->setImage($folder . DIRECTORY_SEPARATOR . $filename);
             }
+            $product->setOwner($this->getUser());
             $objectManager->persist($product);
             $objectManager->flush();
             return $this->redirectToRoute('home');
