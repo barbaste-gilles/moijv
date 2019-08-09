@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes produits{% endblock %}
+
+{% block body %}
+    <h1>Mes produits</h1>
+    {% include 'includes/list_products.html.twig' with {'products' : app.user.products}%}
+{% endblock %}

@@ -1,4 +1,10 @@
 {% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }} {# réinclut le contenu du parent #}
+    <link rel="stylesheet" href="{{ asset("css/selectize.css") }}"/>
+{% endblock %}
+
 {% block title %}
     Ajout d'un produit
 {% endblock %}
@@ -7,4 +13,29 @@
     <h1>Ajoutez votre produit</h1>
 
     {{ form(product_form) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/selectize.js') }}"></script>
+    <script>
+        $(function(){
+            // PS4, Xbox -> ps4, xbox
+            $('#product_tags').selectize({
+                delimiter: ',',
+                valueField: 'name',
+                labelField: 'name',
+                searchField: 'slug',
+                create: true,
+                persist: true,
+                load: function(query, callback) {
+                    // query contient ce qui est saisi par l'utilisateur
+                    if(query.length < 2) {
+                        return ;
+                    }
+                    $.getJSON(/* url de la requête */, /* callback appelé si la requête réussit */);
+                }
+            })
+        });
+    </script>
 {% endblock %}

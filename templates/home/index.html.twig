@@ -9,11 +9,7 @@
     <p>MoiJV est un site collaboratif de prêt de jeux vidéos.</p>
 
     <h2>Nos produits</h2>
-    <ul>
-        {% for product in products %}
-            <li><a href="{{ path('product', { 'id' : product.id }) }}">{{ product.name }}</a></li>
-        {% endfor %}
-    </ul>
+    {% include 'includes/list_products.html.twig' %}
 </div>
 {% endblock %}
 

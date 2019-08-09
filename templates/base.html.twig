@@ -11,6 +11,7 @@
         {% block nav %}
             <a href="{{ path('home') }}">Accueil</a>
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <a href="{{ path('myproducts') }}">Mes produits</a>
                 <a href="{{ path('add_product') }}">Ajouter un produit</a>
                 <a href="{{ path('app_logout') }}">Déconnexion</a>
             {% else %}

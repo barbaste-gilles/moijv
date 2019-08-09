@@ -1,4 +1,7 @@
 {
+    "cocur/slugify": {
+        "version": "v3.2"
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -183,6 +186,9 @@
     },
     "symfony/event-dispatcher-contracts": {
         "version": "v1.1.5"
+    },
+    "symfony/expression-language": {
+        "version": "v4.3.3"
     },
     "symfony/filesystem": {
         "version": "v4.3.3"
