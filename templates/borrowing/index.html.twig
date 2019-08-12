@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Emprunt d'un produit{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css"/>
+{% endblock %}
+
+
+{% block body %}
+
+<div class="example-wrapper">
+    <h1>Emprunter le produit {{ borrowing_form.vars.value.product.name }}</h1>
+
+    {{ form(borrowing_form) }}
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.fr.min.js"></script>
+    <script>
+        $(function () {
+            $('#borrowing_dateStart').datepicker({
+                language: 'fr'
+            });
+        })
+    </script>
+{% endblock %}
+

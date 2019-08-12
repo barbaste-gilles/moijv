@@ -58,9 +58,15 @@ class Product
      */
     private $tags;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Borrowing", mappedBy="product")
+     */
+    private $borrowings;
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();
+        $this->borrowings = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -168,6 +174,37 @@ class Product
     {
         if ($this->tags->contains($tag)) {
             $this->tags->removeElement($tag);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Borrowing[]
+     */
+    public function getBorrowings(): Collection
+    {
+        return $this->borrowings;
+    }
+
+    public function addBorrowing(Borrowing $borrowing): self
+    {
+        if (!$this->borrowings->contains($borrowing)) {
+            $this->borrowings[] = $borrowing;
+            $borrowing->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBorrowing(Borrowing $borrowing): self
+    {
+        if ($this->borrowings->contains($borrowing)) {
+            $this->borrowings->removeElement($borrowing);
+            // set the owning side to null (unless already changed)
+            if ($borrowing->getProduct() === $this) {
+                $borrowing->setProduct(null);
+            }
         }
 
         return $this;

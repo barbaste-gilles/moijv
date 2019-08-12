@@ -56,9 +56,15 @@ class User implements UserInterface
      */
     private $products;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Borrowing", mappedBy="user", orphanRemoval=true)
+     */
+    private $borrowings;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
+        $this->borrowings = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -179,6 +185,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($product->getOwner() === $this) {
                 $product->setOwner(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Borrowing[]
+     */
+    public function getBorrowings(): Collection
+    {
+        return $this->borrowings;
+    }
+
+    public function addBorrowing(Borrowing $borrowing): self
+    {
+        if (!$this->borrowings->contains($borrowing)) {
+            $this->borrowings[] = $borrowing;
+            $borrowing->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBorrowing(Borrowing $borrowing): self
+    {
+        if ($this->borrowings->contains($borrowing)) {
+            $this->borrowings->removeElement($borrowing);
+            // set the owning side to null (unless already changed)
+            if ($borrowing->getUser() === $this) {
+                $borrowing->setUser(null);
             }
         }
 
