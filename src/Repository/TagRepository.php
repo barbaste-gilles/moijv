@@ -22,6 +22,20 @@ class TagRepository extends ServiceEntityRepository
 
     // SELECT * FROM tag WHERE slug LIKE '%$search%'
 
+    /**
+     * returns the tags that match the slug passed as parameter
+     * @param string $slug the slug to search
+     * @return Tag[] the tags that match the given slug in database
+     */
+    public function searchBySlug(string $slug)
+    {
+        return $this->createQueryBuilder('t')
+            ->where('t.slug LIKE :slug')
+            ->setParameter('slug', '%' . $slug . '%')
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Tag[] Returns an array of Tag objects
     //  */

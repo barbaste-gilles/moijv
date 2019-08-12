@@ -17,6 +17,8 @@
 
 {% block javascripts %}
     {{ parent() }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microplugin/0.0.3/microplugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sifter/0.5.3/sifter.min.js"></script>
     <script src="{{ asset('js/selectize.js') }}"></script>
     <script>
         $(function(){
@@ -33,7 +35,9 @@
                     if(query.length < 2) {
                         return ;
                     }
-                    $.getJSON(/* url de la requête */, /* callback appelé si la requête réussit */);
+                    $.getJSON("{{ path('search_tag') }}?search="+encodeURIComponent(query), function(data){
+                        callback(data);
+                    });
                 }
             })
         });
