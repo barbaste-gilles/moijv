@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
 
 {% block nav %}
     {{ parent() }}
@@ -19,7 +19,11 @@
     <h2>Description</h2>
     <p>{{ product.description }}</p>
     <p>Crée le {{ product.creationDate | date('d/m/Y') }}</p>
-    <a class="btn btn-primary" href="{{ path('borrowing', { id: product.id }) }}">Emprunter ce produit</a>
+    {% if is_granted('CAN_BORROW', product) %}
+        <a class="btn btn-primary" href="{{ path('borrowing', { id: product.id }) }}">Emprunter ce produit</a>
+    {% else %}
+        <button disabled class="btn btn-primary">Produit indisponible</button>
+    {% endif %}
     <a href="{{ path('home') }}">Revenir à la page d'accueil</a>
 </div>
 

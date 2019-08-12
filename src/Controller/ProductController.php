@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Form\ProductType;
+use App\Repository\BorrowingRepository;
 use App\Repository\ProductRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -17,10 +18,10 @@ class ProductController extends AbstractController
     /**
      * @Route("/product/{id<\d+>}", name="product")
      */
-    public function details(Product $product)
+    public function details(Product $product, BorrowingRepository $borrowingRepository)
     {
         return $this->render('product/details.html.twig', [
-            'product' => $product,
+            'product' => $product
         ]);
     }
 

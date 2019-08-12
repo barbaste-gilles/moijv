@@ -17,7 +17,7 @@ class BorrowingController extends AbstractController
 {
     /**
      * @Route("/borrowing/{id}", name="borrowing")
-     * @IsGranted("IS_AUTHENTICATED_FULLY")
+     * @IsGranted("CAN_BORROW", subject="product")
      */
     public function index(
         Product $product,
@@ -26,14 +26,6 @@ class BorrowingController extends AbstractController
         BorrowingRepository $borrowingRepository
     )
     {
-        $currentBorrowing = $borrowingRepository->count([
-            'dateEnd' => null,
-            'product' => $product,
-        ]);
-
-        if( $currentBorrowing ) {
-            throw $this->createAccessDeniedException();
-        }
         $user = $this->getUser();
         $borrowing = new Borrowing();
 
@@ -47,6 +39,7 @@ class BorrowingController extends AbstractController
         if($borrowingForm->isSubmitted() && $borrowingForm->isValid()) {
             $objectManager->persist($borrowing);
             $objectManager->flush();
+            return $this->redirectToRoute('home');
         }
 
         return $this->render('borrowing/index.html.twig', [
