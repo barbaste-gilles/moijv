@@ -24,10 +24,10 @@ class AppFixtures extends Fixture
 
         $user = new User();
 
-        $user->setEmail('thibaulttruffert@gmail.com');
+        $user->setEmail('giba1955@orange.fr');
         $user->setRole('ROLE_USER,ROLE_ADMIN');
-        $user->setUsername('thibault');
-        $user->setPassword($this->encoder->encodePassword($user, 'thibault'));
+        $user->setUsername('gilles');
+        $user->setPassword($this->encoder->encodePassword($user, 'gilles'));
         $manager->persist($user);
 
         for($i=0; $i<20; $i++) {
